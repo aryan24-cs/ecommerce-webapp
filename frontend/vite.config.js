@@ -14,4 +14,8 @@ export default defineConfig({
       },
     },
   },
+  // Define environment variables for client-side
+  define: {
+    'process.env': {}
+  }
 })
