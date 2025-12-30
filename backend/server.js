@@ -23,11 +23,30 @@ if (process.env.NODE_ENV !== 'production') {
 // Connecting to database
 connectDB();
 
+// CORS Configuration
+const corsOptions = {
+    origin: [
+        'https://ecommerce-webapp-c4hi.vercel.app',
+        'http://localhost:3000',  // For local development
+        'http://localhost:5173'   // For Vite dev server
+    ],
+    credentials: true,  // Allow cookies to be sent
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+    allowedHeaders: [
+        'Content-Type',
+        'Authorization',
+        'X-Requested-With',
+        'Accept',
+        'Origin'
+    ],
+    optionsSuccessStatus: 200
+};
+
 // Middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(cors());
+app.use(cors(corsOptions));  // Use CORS with options
 app.use(morgan('dev'));
 
 // Static files for uploads
