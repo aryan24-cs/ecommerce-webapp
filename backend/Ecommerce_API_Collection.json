@@ -1,0 +1,156 @@
+{
+    "info": {
+        "_postman_id": "7de7e5d8-3a9d-4c8d-8e8e-c3b6b7a5a5a5",
+        "name": "Ecommerce API Collection",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Auth",
+            "item": [
+                {
+                    "name": "Register User",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"John Doe\",\n    \"email\": \"john@example.com\",\n    \"password\": \"password123\",\n    \"role\": \"admin\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "http://localhost:5000/api/v1/register",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "5000",
+                            "path": [
+                                "api",
+                                "v1",
+                                "register"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Login User",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"email\": \"john@example.com\",\n    \"password\": \"password123\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "http://localhost:5000/api/v1/login",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "5000",
+                            "path": [
+                                "api",
+                                "v1",
+                                "login"
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Products",
+            "item": [
+                {
+                    "name": "Get All Products",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": "http://localhost:5000/api/v1/products"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Create Product (Admin)",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"Wireless Headphones\",\n    \"price\": 99.99,\n    \"description\": \"Pure sound quality with noise cancellation.\",\n    \"category\": \"Electronics\",\n    \"stock\": 50,\n    \"images\": [\n        {\n            \"public_id\": \"prod1\",\n            \"url\": \"https://example.com/image.jpg\"\n        }\n    ]\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": "http://localhost:5000/api/v1/admin/product/new"
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Orders",
+            "item": [
+                {
+                    "name": "Create Order",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"shippingInfo\": {\n        \"address\": \"123 Street\",\n        \"city\": \"Tech City\",\n        \"phoneNo\": \"1234567890\",\n        \"postalCode\": \"10001\",\n        \"country\": \"USA\"\n    },\n    \"orderItems\": [\n        {\n            \"name\": \"Wireless Headphones\",\n            \"quantity\": 1,\n            \"image\": \"https://example.com/image.jpg\",\n            \"price\": 99.99,\n            \"product\": \"PROD_ID_HERE\"\n        }\n    ],\n    \"itemsPrice\": 99.99,\n    \"taxPrice\": 5.00,\n    \"shippingPrice\": 10.00,\n    \"totalPrice\": 114.99\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": "http://localhost:5000/api/v1/order/new"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Download Invoice",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": "http://localhost:5000/api/v1/order/invoice/ORDER_ID_HERE"
+                    },
+                    "response": []
+                }
+            ]
+        }
+    ]
+}
