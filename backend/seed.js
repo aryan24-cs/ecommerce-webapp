@@ -119,9 +119,11 @@ const products = [
     }
 ];
 
+const connectDB = require('./config/db');
+
 const seedProducts = async () => {
     try {
-        await mongoose.connect(process.env.MONGO_URI);
+        await connectDB();
         console.log('DB Connected for seeding...');
 
         // Create an admin user if not exists to own the products
