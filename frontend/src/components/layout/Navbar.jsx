@@ -40,19 +40,19 @@ const Navbar = () => {
     ];
 
     return (
-        <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${isScrolled || mobileMenuOpen ? 'glass-header py-4' : 'bg-transparent py-8'}`}>
-            <div className="max-w-7xl mx-auto px-10 flex items-center justify-between">
+        <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled || mobileMenuOpen ? 'bg-white/90 backdrop-blur-md border-b border-gray-100 py-4' : 'bg-transparent py-6'}`}>
+            <div className="max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between relative z-50">
 
                 {/* Brand */}
-                <Link to="/" className="flex items-center gap-4 group">
-                    <div className="w-11 h-11 bg-black rounded-2xl flex items-center justify-center group-hover:rotate-12 transition-all duration-500 shadow-lg shadow-gray-200">
-                        <span className="text-white font-bold text-xl">S</span>
+                <Link to="/" className="flex items-center gap-3 group">
+                    <div className="w-10 h-10 bg-black rounded-xl flex items-center justify-center group-hover:rotate-12 transition-all duration-500 shadow-lg shadow-gray-200">
+                        <span className="text-white font-bold text-lg">S</span>
                     </div>
-                    <span className="text-2xl font-display font-bold tracking-tighter text-gray-900 group-hover:text-brand-600 transition-colors">ShopNest.</span>
+                    <span className="text-xl lg:text-2xl font-display font-bold tracking-tighter text-gray-900 group-hover:text-brand-600 transition-colors">ShopNest.</span>
                 </Link>
 
-                {/* Centered Navigation */}
-                <div className="hidden lg:flex items-center gap-12">
+                {/* Desktop Navigation */}
+                <div className="hidden lg:flex items-center gap-10">
                     {navLinks.map((link) => (
                         <Link
                             key={link.path}
@@ -62,73 +62,72 @@ const Navbar = () => {
                             `}
                         >
                             {link.label}
-                            <span className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-1 bg-black rounded-full transition-all duration-500 ${location.pathname === link.path ? 'w-full' : 'w-0 group-hover:w-full opacity-20'}`}></span>
+                            <span className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-black rounded-full transition-all duration-500 ${location.pathname === link.path ? 'w-full' : 'w-0 group-hover:w-full opacity-20'}`}></span>
                         </Link>
                     ))}
                 </div>
 
                 {/* Action Suite */}
-                <div className="flex items-center gap-4 lg:gap-8">
-                    <div className="hidden sm:flex items-center gap-2">
-                        <button className="w-11 h-11 flex items-center justify-center text-gray-400 hover:text-black hover:bg-gray-50 rounded-2xl transition-all">
+                <div className="flex items-center gap-3 lg:gap-6">
+                    <div className="flex items-center gap-2">
+                        <button className="w-10 h-10 flex items-center justify-center text-gray-400 hover:text-black hover:bg-gray-50 rounded-xl transition-all">
                             <FiSearch size={20} />
                         </button>
-                        <Link to="/cart" className="w-11 h-11 flex items-center justify-center text-gray-400 hover:text-black hover:bg-gray-50 rounded-2xl transition-all relative">
+                        <Link to="/cart" className="w-10 h-10 flex items-center justify-center text-gray-400 hover:text-black hover:bg-gray-50 rounded-xl transition-all relative">
                             <FiShoppingCart size={20} />
                             {cartItems.length > 0 && (
-                                <span className="absolute top-1.5 right-1.5 bg-black text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center border-2 border-white">
+                                <span className="absolute top-1 right-1 bg-black text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center ring-2 ring-white">
                                     {cartItems.length}
                                 </span>
                             )}
                         </Link>
                     </div>
 
-                    <div className="h-6 w-px bg-gray-100 hidden sm:block"></div>
+                    <div className="h-6 w-px bg-gray-200 hidden sm:block"></div>
 
                     {isAuthenticated ? (
-                        <div className="relative group">
-                            <button className="flex items-center gap-3 p-1.5 pl-4 pr-1.5 rounded-full bg-gray-50 border border-gray-100 hover:border-black transition-all group/btn">
-                                <span className="text-xs font-bold text-gray-900 hidden md:block uppercase tracking-widest">{user?.name?.split(' ')[0]}</span>
-                                <div className="w-9 h-9 bg-black rounded-full flex items-center justify-center text-white text-sm font-bold shadow-md group-hover/btn:scale-105 transition-transform">
+                        <div className="relative group hidden sm:block">
+                            <button className="flex items-center gap-3 pl-3 pr-1 py-1 rounded-full bg-gray-50 border border-gray-100 hover:border-black transition-all group/btn">
+                                <span className="text-xs font-bold text-gray-900 uppercase tracking-widest hidden md:block">{user?.name?.split(' ')[0]}</span>
+                                <div className="w-8 h-8 bg-black rounded-full flex items-center justify-center text-white text-xs font-bold shadow-md group-hover/btn:scale-105 transition-transform">
                                     {user?.name?.charAt(0).toUpperCase()}
                                 </div>
                             </button>
 
-                            {/* Luxury Dropdown */}
-                            <div className="absolute right-0 mt-4 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-500 translate-y-4 group-hover:translate-y-0 z-50">
-                                <div className="bg-white rounded-[2.5rem] shadow-premium-xl border border-gray-100 overflow-hidden p-3">
-                                    <div className="p-6 bg-gray-50 rounded-[2rem] mb-2">
-                                        <p className="text-xs font-bold text-gray-900 uppercase tracking-widest leading-none mb-1">{user.name}</p>
-                                        <p className="text-[10px] text-gray-400 italic truncate">{user.email}</p>
+                            {/* Dropdown */}
+                            <div className="absolute right-0 top-full pt-4 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+                                <div className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden p-2">
+                                    <div className="p-4 bg-gray-50 rounded-xl mb-2">
+                                        <p className="text-xs font-bold text-gray-900">{user.name}</p>
+                                        <p className="text-[10px] text-gray-500 truncate">{user.email}</p>
                                     </div>
-                                    <div className="space-y-1">
-                                        <Link to="/profile" className="flex items-center gap-3 px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-gray-500 hover:text-black hover:bg-gray-50 rounded-2xl transition-all">
-                                            <FiUser /> Profile Overview
+                                    <div className="space-y-0.5">
+                                        <Link to="/profile" className="flex items-center gap-3 px-4 py-3 text-[10px] font-bold uppercase tracking-widest text-gray-600 hover:text-black hover:bg-gray-50 rounded-lg transition-all">
+                                            <FiUser /> Profile
                                         </Link>
-                                        <Link to="/orders" className="flex items-center gap-3 px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-gray-500 hover:text-black hover:bg-gray-50 rounded-2xl transition-all">
-                                            <FiActivity /> Collection History
+                                        <Link to="/orders" className="flex items-center gap-3 px-4 py-3 text-[10px] font-bold uppercase tracking-widest text-gray-600 hover:text-black hover:bg-gray-50 rounded-lg transition-all">
+                                            <FiActivity /> Orders
                                         </Link>
                                         {user?.role === 'admin' && (
-                                            <Link to="/admin/dashboard" className="flex items-center gap-3 px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-brand-600 hover:bg-brand-50 rounded-2xl transition-all">
-                                                <FiGlobe /> Management Portal
+                                            <Link to="/admin/dashboard" className="flex items-center gap-3 px-4 py-3 text-[10px] font-bold uppercase tracking-widest text-brand-600 hover:bg-brand-50 rounded-lg transition-all">
+                                                <FiGlobe /> Admin
                                             </Link>
                                         )}
+                                        <button onClick={handleLogout} className="w-full flex items-center gap-3 px-4 py-3 text-[10px] font-bold uppercase tracking-widest text-red-500 hover:bg-red-50 rounded-lg transition-all text-left">
+                                            <FiX /> Logout
+                                        </button>
                                     </div>
-                                    <div className="h-px bg-gray-50 my-2 mx-6"></div>
-                                    <button onClick={handleLogout} className="w-full text-left px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-red-500 hover:bg-red-50 rounded-2xl transition-all mb-1">
-                                        Sign Out Portal
-                                    </button>
                                 </div>
                             </div>
                         </div>
                     ) : (
-                        <Link to="/login" className="btn-modern btn-modern-primary text-[10px] px-8 tracking-[0.2em] font-bold uppercase">
+                        <Link to="/login" className="hidden sm:flex btn-modern btn-modern-primary text-[10px] px-6 py-2.5 tracking-[0.2em] font-bold uppercase">
                             Sign In
                         </Link>
                     )}
 
                     <button
-                        className="lg:hidden w-11 h-11 flex items-center justify-center bg-gray-50 rounded-2xl"
+                        className="lg:hidden w-10 h-10 flex items-center justify-center bg-gray-100 text-gray-900 rounded-xl hover:bg-black hover:text-white transition-colors"
                         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                     >
                         {mobileMenuOpen ? <FiX size={20} /> : <FiMenu size={20} />}
@@ -136,28 +135,46 @@ const Navbar = () => {
                 </div>
             </div>
 
-            {/* Immersive Mobile Menu */}
-            <div className={`lg:hidden fixed inset-0 top-0 bg-white z-40 transition-transform duration-700 ${mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'} pt-32 px-10`}>
-                <div className="flex flex-col gap-10">
+            {/* Mobile Menu Overlay */}
+            <div className={`absolute top-full left-0 right-0 bg-white shadow-xl border-t border-gray-100 transition-all duration-500 ease-in-out overflow-hidden lg:hidden ${mobileMenuOpen ? 'h-screen opacity-100' : 'h-0 opacity-0'}`}>
+                <div className="flex flex-col p-6 space-y-6">
                     {navLinks.map((link, i) => (
                         <Link
                             key={link.path}
                             to={link.path}
-                            className="text-5xl font-display font-bold text-gray-900 tracking-tighter"
-                            style={{ transitionDelay: `${i * 100}ms` }}
+                            className="text-3xl font-display font-bold text-gray-900 tracking-tight"
+                            onClick={() => setMobileMenuOpen(false)}
+                            style={{ transitionDelay: `${i * 50}ms` }}
                         >
-                            {link.label}.
+                            {link.label}
                         </Link>
                     ))}
-                    <div className="h-px bg-gray-100 my-4"></div>
+
+                    <div className="h-px bg-gray-100 my-2"></div>
+
                     {isAuthenticated ? (
-                        <>
-                            <Link to="/profile" className="text-2xl font-bold text-gray-900 uppercase tracking-widest">My Profile</Link>
-                            <Link to="/orders" className="text-2xl font-bold text-gray-900 uppercase tracking-widest">My Orders</Link>
-                            <button onClick={handleLogout} className="text-left text-2xl font-bold text-red-500 uppercase tracking-widest">Logout</button>
-                        </>
+                        <div className="space-y-4">
+                            <div className="flex items-center gap-3 p-4 bg-gray-50 rounded-2xl">
+                                <div className="w-10 h-10 bg-black rounded-full flex items-center justify-center text-white font-bold">
+                                    {user?.name?.charAt(0).toUpperCase()}
+                                </div>
+                                <div>
+                                    <p className="font-bold text-sm text-gray-900">{user?.name}</p>
+                                    <p className="text-xs text-gray-500">{user?.email}</p>
+                                </div>
+                            </div>
+                            <Link to="/profile" className="block text-lg font-bold text-gray-600 uppercase tracking-widest" onClick={() => setMobileMenuOpen(false)}>My Profile</Link>
+                            <Link to="/orders" className="block text-lg font-bold text-gray-600 uppercase tracking-widest" onClick={() => setMobileMenuOpen(false)}>My Orders</Link>
+                            {user?.role === 'admin' && (
+                                <Link to="/admin/dashboard" className="block text-lg font-bold text-brand-600 uppercase tracking-widest" onClick={() => setMobileMenuOpen(false)}>Admin Dashboard</Link>
+                            )}
+                            <button onClick={handleLogout} className="block text-lg font-bold text-red-500 uppercase tracking-widest text-left">Sign Out</button>
+                        </div>
                     ) : (
-                        <Link to="/register" className="text-2xl font-bold text-brand-600 uppercase tracking-widest">Create Profile</Link>
+                        <div className="grid grid-cols-2 gap-4">
+                            <Link to="/login" className="btn-modern btn-modern-secondary text-center justify-center" onClick={() => setMobileMenuOpen(false)}>Login</Link>
+                            <Link to="/register" className="btn-modern btn-modern-primary text-center justify-center" onClick={() => setMobileMenuOpen(false)}>Register</Link>
+                        </div>
                     )}
                 </div>
             </div>

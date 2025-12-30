@@ -36,7 +36,7 @@ const Profile = () => {
                 <div className="grid lg:grid-cols-3 gap-12">
                     {/* Stats / Quick Info */}
                     <div className="space-y-8 animate-fade-right">
-                        <div className="bg-gray-50 rounded-[2.5rem] p-10 border border-gray-100">
+                        <div className="bg-gray-50 rounded-[2.5rem] p-6 md:p-10 border border-gray-100">
                             <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 mb-8">Account Overview</h3>
                             <div className="space-y-6">
                                 <div className="flex items-center gap-4">
@@ -56,7 +56,7 @@ const Profile = () => {
                             </div>
                         </div>
 
-                        <div className="bg-black rounded-[2.5rem] p-10 text-white relative overflow-hidden group cursor-pointer">
+                        <div className="bg-black rounded-[2.5rem] p-6 md:p-10 text-white relative overflow-hidden group cursor-pointer">
                             <div className="relative z-10">
                                 <h4 className="text-2xl font-bold mb-2">ShopNest Plus</h4>
                                 <p className="text-white/60 font-light text-sm mb-6">Enjoy free shipping and exclusive early access to drops.</p>
@@ -68,7 +68,7 @@ const Profile = () => {
 
                     {/* Details */}
                     <div className="lg:col-span-2 space-y-10 animate-fade-up">
-                        <div className="bg-white border border-gray-100 rounded-[3rem] p-12 shadow-sm">
+                        <div className="bg-white border border-gray-100 rounded-[3rem] p-6 md:p-12 shadow-sm">
                             <div className="flex justify-between items-center mb-12">
                                 <h3 className="text-xs font-bold uppercase tracking-widest text-gray-900">Personal Details</h3>
                                 <button className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-600 hover:text-black transition-colors">
@@ -115,7 +115,7 @@ const Profile = () => {
                         </div>
 
                         <div className="grid sm:grid-cols-2 gap-8">
-                            <Link to="/orders" className="bg-gray-50 rounded-[2.5rem] p-10 border border-gray-100 flex items-center justify-between group hover:bg-black hover:text-white transition-all duration-500">
+                            <Link to="/orders" className="bg-gray-50 rounded-[2.5rem] p-6 md:p-10 border border-gray-100 flex items-center justify-between group hover:bg-black hover:text-white transition-all duration-500">
                                 <div>
                                     <h3 className="text-xs font-bold uppercase tracking-widest mb-2">My Orders</h3>
                                     <p className="text-sm font-light italic opacity-60">Track your purchases.</p>
@@ -124,7 +124,7 @@ const Profile = () => {
                                     <FiArrowRight />
                                 </div>
                             </Link>
-                            <div className="bg-gray-50 rounded-[2.5rem] p-10 border border-gray-100 flex items-center justify-between group hover:bg-brand-500 hover:text-white transition-all duration-500 cursor-pointer">
+                            <div className="bg-gray-50 rounded-[2.5rem] p-6 md:p-10 border border-gray-100 flex items-center justify-between group hover:bg-brand-500 hover:text-white transition-all duration-500 cursor-pointer">
                                 <div>
                                     <h3 className="text-xs font-bold uppercase tracking-widest mb-2">My Wishlist</h3>
                                     <p className="text-sm font-light italic opacity-60">Saved for later.</p>

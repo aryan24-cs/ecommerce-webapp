@@ -70,7 +70,7 @@ const Checkout = () => {
                 <div className="grid lg:grid-cols-12 gap-16">
                     {/* Shipping Form */}
                     <div className="lg:col-span-7 space-y-10 animate-fade-up">
-                        <div className="bg-gray-50 rounded-[2.5rem] p-10 shadow-sm border border-gray-100">
+                        <div className="bg-gray-50 rounded-[2.5rem] p-6 md:p-10 shadow-sm border border-gray-100">
                             <h2 className="text-xl font-bold text-gray-900 mb-8 flex items-center gap-3">
                                 <FiMapPin className="text-brand-600" /> Shipping Information
                             </h2>
@@ -160,7 +160,7 @@ const Checkout = () => {
 
                     {/* Cart Preview */}
                     <div className="lg:col-span-5 h-fit sticky top-32">
-                        <div className="bg-white border border-gray-100 rounded-[2.5rem] p-10">
+                        <div className="bg-white border border-gray-100 rounded-[2.5rem] p-6 md:p-10">
                             <h2 className="text-xs font-bold uppercase tracking-widest text-gray-900 mb-8">Your Items</h2>
                             <div className="space-y-6 max-h-[400px] overflow-y-auto pr-4 mb-8">
                                 {cartItems.map((item, index) => (

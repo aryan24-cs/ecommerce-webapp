@@ -72,7 +72,7 @@ const Orders = () => {
                         {filteredOrders.map((order, index) => (
                             <div
                                 key={order._id}
-                                className="group relative bg-white border border-gray-100 rounded-[3.5rem] p-10 hover:shadow-premium-xl transition-all duration-700 animate-fade-up"
+                                className="group relative bg-white border border-gray-100 rounded-[3.5rem] p-6 md:p-10 hover:shadow-premium-xl transition-all duration-700 animate-fade-up"
                                 style={{ animationDelay: `${index * 0.1}s` }}
                             >
                                 <div className="flex flex-col lg:flex-row justify-between lg:items-center gap-12">

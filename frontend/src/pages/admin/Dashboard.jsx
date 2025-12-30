@@ -54,7 +54,7 @@ const Dashboard = () => {
                 {stats.map((stat, index) => (
                     <div
                         key={index}
-                        className="group relative bg-white rounded-[2.5rem] p-10 border border-gray-100 hover:shadow-premium-xl transition-all duration-700 overflow-hidden"
+                        className="group relative bg-white rounded-[2.5rem] p-6 md:p-10 border border-gray-100 hover:shadow-premium-xl transition-all duration-700 overflow-hidden"
                         style={{ animationDelay: `${index * 0.1}s` }}
                     >
                         <div className="relative z-10 flex flex-col justify-between h-full">

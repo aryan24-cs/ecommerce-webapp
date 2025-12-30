@@ -47,17 +47,17 @@ const AdminProducts = () => {
                     <table className="w-full">
                         <thead>
                             <tr className="text-left text-[10px] font-bold uppercase tracking-[0.25em] text-gray-300 border-b border-gray-100 bg-gray-50/30">
-                                <th className="p-10">Visual Archive</th>
-                                <th className="p-10">Descriptor</th>
-                                <th className="p-10">Stock Allocation</th>
-                                <th className="p-10">Market Value</th>
-                                <th className="p-10 text-right">Operations</th>
+                                <th className="p-6 md:p-10">Visual Archive</th>
+                                <th className="p-6 md:p-10">Descriptor</th>
+                                <th className="p-6 md:p-10">Stock Allocation</th>
+                                <th className="p-6 md:p-10">Market Value</th>
+                                <th className="p-6 md:p-10 text-right">Operations</th>
                             </tr>
                         </thead>
                         <tbody>
                             {products.map((product) => (
                                 <tr key={product._id} className="border-b border-gray-50 hover:bg-gray-50/50 transition-all duration-500 group">
-                                    <td className="p-10">
+                                    <td className="p-6 md:p-10">
                                         <div className="relative w-24 h-32 rounded-3xl overflow-hidden bg-white shadow-sm border border-gray-100 transition-all duration-700 group-hover:scale-105 group-hover:rotate-2">
                                             <img
                                                 src={product.images?.[0]?.url || 'https://via.placeholder.com/100'}
@@ -67,14 +67,14 @@ const AdminProducts = () => {
                                             <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                                         </div>
                                     </td>
-                                    <td className="p-10">
+                                    <td className="p-6 md:p-10">
                                         <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-600 block mb-2">{product.category}</span>
                                         <h4 className="text-xl font-bold text-gray-900 mb-2 leading-tight group-hover:text-brand-600 transition-colors uppercase tracking-tighter">{product.name}</h4>
                                         <div className="flex items-center gap-2 text-[10px] font-bold text-gray-400 uppercase tracking-widest italic opacity-60">
                                             <FiLayers /> Internal ID: #{product._id?.slice(-6).toUpperCase()}
                                         </div>
                                     </td>
-                                    <td className="p-10 text-gray-400">
+                                    <td className="p-6 md:p-10 text-gray-400">
                                         <div className="space-y-3">
                                             <div className="flex items-center justify-between gap-12">
                                                 <span className={`text-xs font-bold uppercase tracking-widest ${product.stock > 10 ? 'text-green-600' : product.stock > 0 ? 'text-yellow-600' : 'text-red-600'}`}>
@@ -87,13 +87,13 @@ const AdminProducts = () => {
                                             </div>
                                         </div>
                                     </td>
-                                    <td className="p-10">
+                                    <td className="p-6 md:p-10">
                                         <div className="flex flex-col">
                                             <span className="text-2xl font-bold text-gray-900 tracking-tight">${product.price?.toLocaleString()}</span>
                                             <span className="text-[10px] text-gray-400 font-bold uppercase tracking-widest italic">USD Market Per Unit</span>
                                         </div>
                                     </td>
-                                    <td className="p-10 text-right">
+                                    <td className="p-6 md:p-10 text-right">
                                         <div className="flex justify-end gap-4 opacity-0 group-hover:opacity-100 translate-x-4 group-hover:translate-x-0 transition-all duration-500">
                                             <Link
                                                 to={`/admin/products/edit/${product._id}`}
@@ -117,7 +117,7 @@ const AdminProducts = () => {
                     </table>
                 </div>
                 {products.length === 0 && (
-                    <div className="p-32 text-center">
+                    <div className="p-10 md:p-32 text-center">
                         <div className="w-24 h-24 bg-gray-50 rounded-[2.5rem] flex items-center justify-center mx-auto mb-8 border border-gray-100">
                             <FiShoppingBag className="text-4xl text-gray-200" />
                         </div>

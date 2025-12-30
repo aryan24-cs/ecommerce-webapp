@@ -61,7 +61,7 @@ const AdminOrders = () => {
                 {allOrders.map((order, index) => (
                     <div
                         key={order._id}
-                        className="bg-white border border-gray-100 rounded-[3.5rem] p-10 hover:shadow-premium-xl transition-all duration-700 group relative overflow-hidden"
+                        className="bg-white border border-gray-100 rounded-[3.5rem] p-6 md:p-10 hover:shadow-premium-xl transition-all duration-700 group relative overflow-hidden"
                         style={{ animationDelay: `${index * 0.1}s` }}
                     >
                         <div className="flex flex-col xl:flex-row items-center gap-12 relative z-10">
@@ -132,7 +132,7 @@ const AdminOrders = () => {
                 ))}
 
                 {allOrders.length === 0 && (
-                    <div className="p-32 text-center bg-gray-50 rounded-[4rem] border border-dashed border-gray-200">
+                    <div className="p-10 md:p-32 text-center bg-gray-50 rounded-[4rem] border border-dashed border-gray-200">
                         <div className="w-24 h-24 bg-white rounded-[2rem] flex items-center justify-center mx-auto mb-8 shadow-sm">
                             <FiBox className="text-4xl text-gray-200" />
                         </div>
