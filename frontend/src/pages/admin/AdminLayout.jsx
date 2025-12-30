@@ -18,7 +18,7 @@ const AdminLayout = () => {
     const isActive = (path) => location.pathname === path;
 
     return (
-        <div className="min-h-screen flex bg-gray-50/50">
+        <div className="min-h-screen flex bg-gray-50/50 overflow-hidden">
 
             {/* Sidebar */}
             <aside className={`
@@ -132,7 +132,7 @@ const AdminLayout = () => {
                 </header>
 
                 {/* Content Content Container */}
-                <main className="flex-1 overflow-y-auto p-10 lg:p-12">
+                <main className="flex-1 overflow-y-auto p-4 md:p-10 lg:p-12">
                     <div className="max-w-7xl mx-auto">
                         <Outlet />
                     </div>

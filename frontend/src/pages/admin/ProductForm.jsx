@@ -16,8 +16,8 @@ const ProductForm = () => {
         category: '',
         stock: '',
     });
-    const [imagePreview, setImagePreview] = useState('');
-    const [imageUrl, setImageUrl] = useState('');
+    const [images, setImages] = useState([]);
+    const [imagesPreview, setImagesPreview] = useState([]);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -41,9 +41,8 @@ const ProductForm = () => {
                 category: product.category || '',
                 stock: product.stock || '',
             });
-            if (product.images?.[0]?.url) {
-                setImagePreview(product.images[0].url);
-                setImageUrl(product.images[0].url);
+            if (product.images) {
+                setImagesPreview(product.images.map(img => img.url));
             }
         }
     }, [product, isEdit]);
@@ -52,21 +51,36 @@ const ProductForm = () => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleImageUrlChange = (e) => {
-        const url = e.target.value;
-        setImageUrl(url);
-        setImagePreview(url);
+    const handleFileChange = (e) => {
+        const files = Array.from(e.target.files);
+        setImages(files);
+
+        const filePreviews = [];
+        files.forEach((file) => {
+            const reader = new FileReader();
+            reader.onload = () => {
+                if (reader.readyState === 2) {
+                    filePreviews.push(reader.result);
+                    setImagesPreview([...filePreviews]);
+                }
+            };
+            reader.readAsDataURL(file);
+        });
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const productData = {
-            ...formData,
-            price: Number(formData.price),
-            stock: Number(formData.stock),
-            images: imageUrl ? [{ public_id: 'manual', url: imageUrl }] : [],
-        };
+        const productData = new FormData();
+        productData.set('name', formData.name);
+        productData.set('price', formData.price);
+        productData.set('description', formData.description);
+        productData.set('category', formData.category);
+        productData.set('stock', formData.stock);
+
+        images.forEach(image => {
+            productData.append('images', image);
+        });
 
         try {
             if (isEdit) {
@@ -94,34 +108,30 @@ const ProductForm = () => {
                 <form onSubmit={handleSubmit} className="space-y-6">
                     {/* Image Preview */}
                     <div>
-                        <label className="block text-sm text-gray-300 mb-2">Product Image</label>
-                        {imagePreview ? (
-                            <div className="relative inline-block">
+                        <label className="block text-sm text-gray-300 mb-2">Product Images</label>
+                        <div className="flex gap-4 mb-4 overflow-x-auto">
+                            {imagesPreview.map((img, index) => (
                                 <img
-                                    src={imagePreview}
+                                    key={index}
+                                    src={img}
                                     alt="Preview"
-                                    className="w-32 h-32 object-cover rounded-lg"
+                                    className="w-24 h-24 object-cover rounded-lg border border-gray-600"
                                 />
-                                <button
-                                    type="button"
-                                    onClick={() => { setImagePreview(''); setImageUrl(''); }}
-                                    className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1"
-                                >
-                                    <FiX />
-                                </button>
-                            </div>
-                        ) : (
-                            <div className="w-32 h-32 border-2 border-dashed border-gray-600 rounded-lg flex items-center justify-center">
-                                <FiUpload className="text-2xl text-gray-500" />
-                            </div>
-                        )}
-                        <input
-                            type="text"
-                            value={imageUrl}
-                            onChange={handleImageUrlChange}
-                            className="input-field mt-3"
-                            placeholder="Enter image URL"
-                        />
+                            ))}
+                        </div>
+
+                        <div className="w-full border-2 border-dashed border-gray-600 rounded-lg p-6 flex flex-col items-center justify-center cursor-pointer hover:border-brand-500 transition-colors relative">
+                            <FiUpload className="text-3xl text-gray-400 mb-2" />
+                            <span className="text-sm text-gray-400">Click to upload from gallery</span>
+                            <input
+                                type="file"
+                                name="images"
+                                accept="image/*"
+                                onChange={handleFileChange}
+                                multiple
+                                className="absolute inset-0 opacity-0 cursor-pointer"
+                            />
+                        </div>
                     </div>
 
                     <div>

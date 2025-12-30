@@ -39,7 +39,9 @@ export const createProduct = createAsyncThunk(
     'products/create',
     async (productData, { rejectWithValue }) => {
         try {
-            const response = await api.post('/admin/product/new', productData);
+            const response = await api.post('/admin/product/new', productData, {
+                headers: { 'Content-Type': 'multipart/form-data' },
+            });
             return response.data;
         } catch (error) {
             return rejectWithValue(error.response?.data?.message || 'Failed to create product');
@@ -52,7 +54,9 @@ export const updateProduct = createAsyncThunk(
     'products/update',
     async ({ id, productData }, { rejectWithValue }) => {
         try {
-            const response = await api.put(`/admin/product/${id}`, productData);
+            const response = await api.put(`/admin/product/${id}`, productData, {
+                headers: { 'Content-Type': 'multipart/form-data' },
+            });
             return response.data;
         } catch (error) {
             return rejectWithValue(error.response?.data?.message || 'Failed to update product');

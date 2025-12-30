@@ -27,113 +27,136 @@ const Products = () => {
     });
 
     return (
-        <div className="min-h-screen bg-white pt-32 pb-24 px-6">
-            <div className="max-w-7xl mx-auto">
-
-                {/* Page Header */}
-                <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-                    <div className="animate-fade-up">
-                        <h1 className="text-5xl font-display font-bold text-gray-900 tracking-tight mb-4">Shop All</h1>
-                        <p className="text-lg text-gray-500 font-light italic">Refined essentials for the modern everyday.</p>
-                    </div>
-                    <div className="flex items-center gap-4 text-sm font-bold uppercase tracking-widest text-gray-400">
-                        <span>Showing {filteredProducts.length} Results</span>
-                    </div>
+        <div className="min-h-screen bg-white w-full overflow-hidden">
+            {/* Immersive Header */}
+            {/* Immersive Header */}
+            {/* Immersive Header */}
+            <div className="bg-white text-gray-900 pt-48 pb-24 px-6 relative overflow-hidden flex flex-col items-center justify-center min-h-[50vh]">
+                <div className="max-w-7xl mx-auto relative z-10 text-center">
+                    <span className="inline-block py-2 px-6 rounded-full border border-brand-100 bg-brand-50 text-xs font-bold uppercase tracking-[0.2em] mb-8 animate-fade-up text-brand-600">
+                        The Collection
+                    </span>
+                    <h1 className="text-7xl md:text-9xl font-display font-bold tracking-tighter mb-6 animate-fade-up leading-tight" style={{ animationDelay: '0.1s' }}>
+                        Curated <br className="hidden md:block" />
+                        Essentials.
+                    </h1>
+                    <p className="text-xl text-gray-500 font-light max-w-2xl mx-auto animate-fade-up mt-8" style={{ animationDelay: '0.2s' }}>
+                        Discover our hand-picked selection of premium goods designed to elevate your everyday life. Quality, aesthetics, and function in perfect harmony.
+                    </p>
                 </div>
+            </div>
 
-                <div className="grid lg:grid-cols-12 gap-12">
+            <div className="max-w-7xl mx-auto px-6 py-16">
+                <div className="grid lg:grid-cols-12 gap-12 items-start">
 
-                    {/* Filters Sidebar */}
-                    <aside className="lg:col-span-3 space-y-10">
+                    {/* Filters Sidebar - Sticky & Refined */}
+                    <aside className="lg:col-span-3 sticky top-32 z-30 transition-all duration-300">
+                        <div className="space-y-10 p-2 md:p-0">
 
-                        {/* Search */}
-                        <div>
-                            <h3 className="text-xs font-bold uppercase tracking-widest text-gray-900 mb-4">Search</h3>
-                            <div className="relative">
-                                <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
+                            {/* Search */}
+                            <div>
+                                <h3 className="text-xs font-bold uppercase tracking-widest text-gray-900 mb-4 flex items-center gap-2">
+                                    <FiSearch className="text-gray-400" /> Search
+                                </h3>
                                 <input
                                     type="text"
                                     value={searchTerm}
                                     onChange={(e) => setSearchTerm(e.target.value)}
-                                    placeholder="What are you looking for?"
-                                    className="w-full pl-11 pr-4 py-3 rounded-2xl bg-gray-50 border-none outline-none focus:ring-2 focus:ring-brand-100 transition-all font-light"
+                                    placeholder="Type to search..."
+                                    className="w-full bg-transparent border-b border-gray-200 py-2 text-lg font-display focus:border-black outline-none transition-colors placeholder:text-gray-300"
                                 />
                             </div>
-                        </div>
 
-                        {/* Categories */}
-                        <div>
-                            <h3 className="text-xs font-bold uppercase tracking-widest text-gray-900 mb-4">Categories</h3>
-                            <div className="flex flex-col gap-2">
-                                <button
-                                    onClick={() => setSelectedCategory('')}
-                                    className={`text-left px-4 py-2 rounded-xl transition-all text-sm font-medium ${!selectedCategory ? 'bg-black text-white' : 'text-gray-500 hover:bg-gray-50'}`}
-                                >
-                                    All Items
-                                </button>
-                                {categories.map(cat => (
+                            {/* Categories */}
+                            <div>
+                                <h3 className="text-xs font-bold uppercase tracking-widest text-gray-900 mb-4 flex items-center gap-2">
+                                    <FiGrid className="text-gray-400" /> Filter by
+                                </h3>
+                                <div className="space-y-1">
                                     <button
-                                        key={cat}
-                                        onClick={() => setSelectedCategory(cat)}
-                                        className={`text-left px-4 py-2 rounded-xl transition-all text-sm font-medium ${selectedCategory === cat ? 'bg-black text-white' : 'text-gray-500 hover:bg-gray-50'}`}
+                                        onClick={() => setSelectedCategory('')}
+                                        className={`w-full text-left px-4 py-3 rounded-xl text-sm transition-all duration-300 flex justify-between items-center group
+                                            ${!selectedCategory ? 'bg-black text-white shadow-lg' : 'text-gray-500 hover:bg-gray-50 hover:text-black'}
+                                        `}
                                     >
-                                        {cat}
+                                        <span className="font-bold">View All</span>
+                                        {!selectedCategory && <span className="w-1.5 h-1.5 rounded-full bg-white"></span>}
                                     </button>
-                                ))}
+                                    {categories.map(cat => (
+                                        <button
+                                            key={cat}
+                                            onClick={() => setSelectedCategory(cat)}
+                                            className={`w-full text-left px-4 py-3 rounded-xl text-sm transition-all duration-300 flex justify-between items-center group
+                                                ${selectedCategory === cat ? 'bg-black text-white shadow-lg' : 'text-gray-500 hover:bg-gray-50 hover:text-black'}
+                                            `}
+                                        >
+                                            <span className="font-medium group-hover:translate-x-1 transition-transform">{cat}</span>
+                                            {selectedCategory === cat && <span className="w-1.5 h-1.5 rounded-full bg-white"></span>}
+                                        </button>
+                                    ))}
+                                </div>
                             </div>
-                        </div>
 
-                        {/* Price Range */}
-                        <div>
-                            <h3 className="text-xs font-bold uppercase tracking-widest text-gray-900 mb-4">Price Range</h3>
-                            <div className="space-y-4">
-                                <div className="flex items-center gap-3">
-                                    <div className="flex-1 bg-gray-50 rounded-xl p-3 flex flex-col">
-                                        <span className="text-[10px] text-gray-400 uppercase font-bold mb-1">Min</span>
-                                        <input
-                                            type="number"
-                                            value={priceRange[0]}
-                                            onChange={(e) => setPriceRange([Number(e.target.value), priceRange[1]])}
-                                            className="bg-transparent outline-none font-bold text-sm"
-                                        />
-                                    </div>
-                                    <div className="flex-1 bg-gray-50 rounded-xl p-3 flex flex-col">
-                                        <span className="text-[10px] text-gray-400 uppercase font-bold mb-1">Max</span>
-                                        <input
-                                            type="number"
-                                            value={priceRange[1]}
-                                            onChange={(e) => setPriceRange([priceRange[0], Number(e.target.value)])}
-                                            className="bg-transparent outline-none font-bold text-sm"
-                                        />
+                            {/* Price Range */}
+                            <div>
+                                <h3 className="text-xs font-bold uppercase tracking-widest text-gray-900 mb-6 flex items-center gap-2">
+                                    <FiSliders className="text-gray-400" /> Price Range
+                                </h3>
+                                <div className="space-y-6">
+                                    <input
+                                        type="range"
+                                        min="0"
+                                        max="1000"
+                                        value={priceRange[1]}
+                                        onChange={(e) => setPriceRange([priceRange[0], Number(e.target.value)])}
+                                        className="w-full h-1 bg-gray-100 rounded-lg appearance-none cursor-pointer accent-black"
+                                    />
+                                    <div className="flex justify-between items-center">
+                                        <div className="px-4 py-2 bg-gray-50 rounded-lg border border-gray-100 text-sm font-bold text-gray-900 min-w-[80px] text-center">
+                                            ${priceRange[0]}
+                                        </div>
+                                        <span className="text-gray-300 font-light text-sm">to</span>
+                                        <div className="px-4 py-2 bg-gray-50 rounded-lg border border-gray-100 text-sm font-bold text-gray-900 min-w-[80px] text-center">
+                                            ${priceRange[1]}
+                                        </div>
                                     </div>
                                 </div>
-                                <input
-                                    type="range"
-                                    min="0"
-                                    max="1000"
-                                    value={priceRange[1]}
-                                    onChange={(e) => setPriceRange([priceRange[0], Number(e.target.value)])}
-                                    className="w-full accent-black"
-                                />
                             </div>
                         </div>
                     </aside>
 
                     {/* Product Grid */}
-                    <main className="lg:col-span-9">
+                    <main className="lg:col-span-9 min-h-[600px]">
+                        <div className="flex justify-between items-end mb-8 border-b border-gray-100 pb-4">
+                            <span className="text-sm font-bold text-gray-400 uppercase tracking-widest">
+                                {filteredProducts.length} Premium Items
+                            </span>
+                            <div className="flex gap-2">
+                                <button className="w-8 h-8 flex items-center justify-center text-gray-400 hover:text-black transition-colors"><FiGrid /></button>
+                                <button className="w-8 h-8 flex items-center justify-center text-gray-400 hover:text-black transition-colors"><FiList /></button>
+                            </div>
+                        </div>
+
                         {loading ? (
-                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
                                 {[1, 2, 3, 4, 5, 6].map(i => (
-                                    <div key={i} className="aspect-[4/5] bg-gray-50 rounded-3xl animate-pulse"></div>
+                                    <div key={i} className="aspect-[3/4] bg-gray-100 rounded-[2rem] animate-pulse"></div>
                                 ))}
                             </div>
                         ) : filteredProducts.length === 0 ? (
-                            <div className="py-20 text-center bg-gray-50 rounded-[2.5rem]">
-                                <p className="text-xl text-gray-400 font-light">No products match your criteria.</p>
-                                <button onClick={() => { setSearchTerm(''); setSelectedCategory(''); setPriceRange([0, 1000]); }} className="mt-4 text-brand-600 font-bold underline">Clear all filters</button>
+                            <div className="flex flex-col items-center justify-center py-32 text-center bg-gray-50 rounded-[3rem]">
+                                <FiSearch className="text-4xl text-gray-300 mb-4" />
+                                <h3 className="text-xl font-bold text-gray-900 mb-2">No matches found</h3>
+                                <p className="text-gray-500 mb-6 max-w-xs mx-auto">Try adjusting your filters or search terms to find what you're looking for.</p>
+                                <button
+                                    onClick={() => { setSearchTerm(''); setSelectedCategory(''); setPriceRange([0, 1000]); }}
+                                    className="btn-modern btn-modern-primary"
+                                >
+                                    Clear Filters
+                                </button>
                             </div>
                         ) : (
-                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
                                 {filteredProducts.map(product => (
                                     <ProductCard key={product._id} product={product} />
                                 ))}

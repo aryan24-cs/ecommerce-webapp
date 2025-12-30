@@ -33,66 +33,77 @@ import AdminOrders from './pages/admin/AdminOrders';
 
 import './index.css';
 
+import { useLocation } from 'react-router-dom';
+
+function AppContent() {
+    const location = useLocation();
+    const isAdminRoute = location.pathname.startsWith('/admin');
+
+    return (
+        <div className="min-h-screen flex flex-col bg-white">
+            {!isAdminRoute && <Navbar />}
+            <main className="flex-1">
+                <Routes>
+                    {/* Public Routes */}
+                    <Route path="/" element={<Home />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/register" element={<Register />} />
+                    <Route path="/products" element={<Products />} />
+                    <Route path="/categories" element={<Categories />} />
+                    <Route path="/about" element={<About />} />
+                    <Route path="/product/:id" element={<ProductDetail />} />
+
+                    {/* Protected User Routes */}
+                    <Route path="/cart" element={
+                        <ProtectedRoute>
+                            <Cart />
+                        </ProtectedRoute>
+                    } />
+                    <Route path="/checkout" element={
+                        <ProtectedRoute>
+                            <Checkout />
+                        </ProtectedRoute>
+                    } />
+                    <Route path="/order-success" element={
+                        <ProtectedRoute>
+                            <OrderSuccess />
+                        </ProtectedRoute>
+                    } />
+                    <Route path="/orders" element={
+                        <ProtectedRoute>
+                            <Orders />
+                        </ProtectedRoute>
+                    } />
+                    <Route path="/profile" element={
+                        <ProtectedRoute>
+                            <Profile />
+                        </ProtectedRoute>
+                    } />
+
+                    {/* Admin Routes */}
+                    <Route path="/admin" element={
+                        <ProtectedRoute adminOnly>
+                            <AdminLayout />
+                        </ProtectedRoute>
+                    }>
+                        <Route path="dashboard" element={<Dashboard />} />
+                        <Route path="products" element={<AdminProducts />} />
+                        <Route path="products/new" element={<ProductForm />} />
+                        <Route path="products/edit/:id" element={<ProductForm />} />
+                        <Route path="orders" element={<AdminOrders />} />
+                    </Route>
+                </Routes>
+            </main>
+            {!isAdminRoute && <Footer />}
+        </div>
+    );
+}
+
 function App() {
     return (
         <Provider store={store}>
             <Router>
-                <div className="min-h-screen flex flex-col bg-white">
-                    <Navbar />
-                    <main className="flex-1">
-                        <Routes>
-                            {/* Public Routes */}
-                            <Route path="/" element={<Home />} />
-                            <Route path="/login" element={<Login />} />
-                            <Route path="/register" element={<Register />} />
-                            <Route path="/products" element={<Products />} />
-                            <Route path="/categories" element={<Categories />} />
-                            <Route path="/about" element={<About />} />
-                            <Route path="/product/:id" element={<ProductDetail />} />
-
-                            {/* Protected User Routes */}
-                            <Route path="/cart" element={
-                                <ProtectedRoute>
-                                    <Cart />
-                                </ProtectedRoute>
-                            } />
-                            <Route path="/checkout" element={
-                                <ProtectedRoute>
-                                    <Checkout />
-                                </ProtectedRoute>
-                            } />
-                            <Route path="/order-success" element={
-                                <ProtectedRoute>
-                                    <OrderSuccess />
-                                </ProtectedRoute>
-                            } />
-                            <Route path="/orders" element={
-                                <ProtectedRoute>
-                                    <Orders />
-                                </ProtectedRoute>
-                            } />
-                            <Route path="/profile" element={
-                                <ProtectedRoute>
-                                    <Profile />
-                                </ProtectedRoute>
-                            } />
-
-                            {/* Admin Routes */}
-                            <Route path="/admin" element={
-                                <ProtectedRoute adminOnly>
-                                    <AdminLayout />
-                                </ProtectedRoute>
-                            }>
-                                <Route path="dashboard" element={<Dashboard />} />
-                                <Route path="products" element={<AdminProducts />} />
-                                <Route path="products/new" element={<ProductForm />} />
-                                <Route path="products/edit/:id" element={<ProductForm />} />
-                                <Route path="orders" element={<AdminOrders />} />
-                            </Route>
-                        </Routes>
-                    </main>
-                    <Footer />
-                </div>
+                <AppContent />
                 <ToastContainer
                     position="bottom-center"
                     autoClose={3000}

@@ -5,8 +5,21 @@ exports.newProduct = async (req, res, next) => {
     try {
         req.body.user = req.user.id;
 
-        // Note: Image handling would typically happen in a middleware before this
-        // and add info to req.body. For now, assuming images[0].url is provided or handled.
+        // Handle Image Upload
+        let images = [];
+        if (req.files && req.files.length > 0) {
+            req.files.forEach(file => {
+                images.push({
+                    public_id: file.filename,
+                    url: `${req.protocol}://${req.get('host')}/uploads/${file.filename}`
+                });
+            });
+        }
+
+        // Use uploaded images if available, otherwise fallback to body images (if any)
+        if (images.length > 0) {
+            req.body.images = images;
+        }
 
         const product = await Product.create(req.body);
 
@@ -49,6 +62,22 @@ exports.updateProduct = async (req, res, next) => {
 
     if (!product) {
         return res.status(404).json({ message: 'Product not found' });
+    }
+
+    // Handle Image Upload
+    let images = [];
+    if (req.files && req.files.length > 0) {
+        req.files.forEach(file => {
+            images.push({
+                public_id: file.filename,
+                url: `${req.protocol}://${req.get('host')}/uploads/${file.filename}`
+            });
+        });
+    }
+
+    // If new images uploaded, replace existing
+    if (images.length > 0) {
+        req.body.images = images;
     }
 
     product = await Product.findByIdAndUpdate(req.params.id, req.body, {

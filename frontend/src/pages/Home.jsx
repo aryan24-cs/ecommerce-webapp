@@ -16,7 +16,7 @@ const Home = () => {
     const featuredProducts = products?.slice(0, 4) || [];
 
     return (
-        <div className="bg-white overflow-hidden">
+        <div className="bg-white w-full overflow-hidden">
             {/* Hero Section */}
             <section className="relative h-screen flex items-center justify-center pt-20">
                 <div className="absolute inset-0 z-0">

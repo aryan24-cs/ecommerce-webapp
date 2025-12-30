@@ -28,7 +28,7 @@ const Dashboard = () => {
     return (
         <div className="animate-fade-up">
             {/* Header */}
-            <div className="flex flex-col xl:flex-row justify-between xl:items-end mb-16 gap-8">
+            <div className="flex flex-col xl:flex-row justify-between xl:items-end mb-8 md:mb-16 gap-8">
                 <div>
                     <div className="flex items-center gap-3 mb-4">
                         <div className="px-4 py-1.5 rounded-full bg-brand-50 text-brand-600 font-bold uppercase tracking-widest text-[10px] border border-brand-100">Live Insights</div>
@@ -50,11 +50,11 @@ const Dashboard = () => {
             </div>
 
             {/* Stats Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 xl:gap-8 mb-16">
                 {stats.map((stat, index) => (
                     <div
                         key={index}
-                        className="group relative bg-white rounded-[2.5rem] p-6 md:p-10 border border-gray-100 hover:shadow-premium-xl transition-all duration-700 overflow-hidden"
+                        className="group relative bg-white rounded-[2.5rem] p-6 xl:p-10 border border-gray-100 hover:shadow-premium-xl transition-all duration-700 overflow-hidden"
                         style={{ animationDelay: `${index * 0.1}s` }}
                     >
                         <div className="relative z-10 flex flex-col justify-between h-full">
@@ -77,10 +77,10 @@ const Dashboard = () => {
                 ))}
             </div>
 
-            <div className="grid xl:grid-cols-3 gap-12">
+            <div className="grid xl:grid-cols-3 gap-6 xl:gap-12">
                 {/* Recent Transactions */}
                 <div className="xl:col-span-2 space-y-8">
-                    <div className="bg-white rounded-[3rem] p-12 border border-gray-100 shadow-sm">
+                    <div className="bg-white rounded-[3rem] p-6 md:p-12 border border-gray-100 shadow-sm">
                         <div className="flex justify-between items-center mb-12">
                             <h2 className="text-xs font-bold uppercase tracking-widest text-gray-900">Recent Transactions</h2>
                             <Link to="/admin/orders" className="text-xs font-bold uppercase tracking-widest text-brand-600 hover:text-black transition-colors flex items-center gap-3 group">
@@ -131,7 +131,7 @@ const Dashboard = () => {
 
                 {/* Sidebar Info - Quick Inventory */}
                 <div className="space-y-8">
-                    <div className="bg-black rounded-[3rem] p-12 text-white relative overflow-hidden group">
+                    <div className="bg-black rounded-[3rem] p-6 md:p-12 text-white relative overflow-hidden group">
                         <div className="relative z-10">
                             <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-white/40 mb-10">Inventory Health</p>
                             <div className="space-y-8">
@@ -158,7 +158,7 @@ const Dashboard = () => {
                         <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-brand-500/10 rounded-full blur-3xl"></div>
                     </div>
 
-                    <div className="bg-white rounded-[3rem] p-12 border border-gray-100 shadow-sm text-center">
+                    <div className="bg-white rounded-[3rem] p-6 md:p-12 border border-gray-100 shadow-sm text-center">
                         <div className="w-20 h-20 bg-brand-50 rounded-[1.5rem] flex items-center justify-center mx-auto mb-8 border border-brand-100">
                             <FiUsers className="text-3xl text-brand-600" />
                         </div>
