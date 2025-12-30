@@ -26,7 +26,7 @@ connectDB();
 // CORS Configuration
 const corsOptions = {
     origin: [
-        'https://ecommerce-webapp-c4hi.vercel.app',
+        'https://ecommerce-webapp-w5g9.vercel.app',
         'http://localhost:3000',  // For local development
         'http://localhost:5173'   // For Vite dev server
     ],
