@@ -13,7 +13,7 @@ const Home = () => {
         dispatch(getProducts());
     }, [dispatch]);
 
-    const featuredProducts = products.slice(0, 4);
+    const featuredProducts = products?.slice(0, 4) || [];
 
     return (
         <div className="bg-white overflow-hidden">

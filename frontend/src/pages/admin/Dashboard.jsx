@@ -15,13 +15,13 @@ const Dashboard = () => {
         dispatch(getAllOrders());
     }, [dispatch]);
 
-    const totalRevenue = allOrders.reduce((acc, order) => acc + (order.totalPrice || 0), 0);
-    const outOfStock = products.filter((p) => p.stock === 0).length;
+    const totalRevenue = allOrders?.reduce((acc, order) => acc + (order.totalPrice || 0), 0) || 0;
+    const outOfStock = products?.filter((p) => p.stock === 0).length || 0;
 
     const stats = [
         { label: 'Total Revenue', value: `$${totalRevenue.toLocaleString()}`, trend: '+12.5%', icon: <FiDollarSign />, color: 'bg-brand-50 text-brand-600 border-brand-100' },
-        { label: 'Completed Sales', value: allOrders.length, trend: '+8.2%', icon: <FiTrendingUp />, color: 'bg-green-50 text-green-600 border-green-100' },
-        { label: 'Inventory Items', value: products.length, trend: 'Optimal', icon: <FiShoppingBag />, color: 'bg-blue-50 text-blue-600 border-blue-100' },
+        { label: 'Completed Sales', value: allOrders?.length || 0, trend: '+8.2%', icon: <FiTrendingUp />, color: 'bg-green-50 text-green-600 border-green-100' },
+        { label: 'Inventory Items', value: products?.length || 0, trend: 'Optimal', icon: <FiShoppingBag />, color: 'bg-blue-50 text-blue-600 border-blue-100' },
         { label: 'Fulfillment Risk', value: outOfStock, trend: 'Low', icon: <FiPackage />, color: 'bg-red-50 text-red-600 border-red-100' },
     ];
 
@@ -99,7 +99,7 @@ const Dashboard = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {allOrders.slice(0, 6).map((order) => (
+                                    {allOrders?.slice(0, 6).map((order) => (
                                         <tr key={order._id} className="group hover:bg-gray-50/50 transition-all border-b border-gray-50/50">
                                             <td className="py-6 pr-4">
                                                 <span className="text-sm font-mono font-bold text-gray-900 uppercase">#{order._id?.slice(-8)}</span>
@@ -135,7 +135,7 @@ const Dashboard = () => {
                         <div className="relative z-10">
                             <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-white/40 mb-10">Inventory Health</p>
                             <div className="space-y-8">
-                                {products.slice(0, 3).map((p, i) => (
+                                {products?.slice(0, 3).map((p, i) => (
                                     <div key={i} className="flex items-center gap-4 group/item">
                                         <div className="w-14 h-14 rounded-2xl bg-white/10 overflow-hidden flex-shrink-0">
                                             <img src={p.images?.[0]?.url} className="w-full h-full object-cover opacity-80 group-hover/item:opacity-100 transition-opacity" />

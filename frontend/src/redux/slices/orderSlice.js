@@ -107,7 +107,7 @@ const orderSlice = createSlice({
             })
             .addCase(getMyOrders.fulfilled, (state, action) => {
                 state.loading = false;
-                state.orders = action.payload.orders;
+                state.orders = action.payload.orders || [];
             })
             .addCase(getMyOrders.rejected, (state, action) => {
                 state.loading = false;
@@ -119,7 +119,7 @@ const orderSlice = createSlice({
             })
             // Admin: Get all orders
             .addCase(getAllOrders.fulfilled, (state, action) => {
-                state.allOrders = action.payload.orders;
+                state.allOrders = action.payload.orders || [];
             })
             // Admin: Update order status
             .addCase(updateOrderStatus.fulfilled, (state, action) => {

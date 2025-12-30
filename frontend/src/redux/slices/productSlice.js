@@ -92,7 +92,7 @@ const productSlice = createSlice({
             })
             .addCase(getProducts.fulfilled, (state, action) => {
                 state.loading = false;
-                state.products = action.payload.products;
+                state.products = action.payload.products || [];
             })
             .addCase(getProducts.rejected, (state, action) => {
                 state.loading = false;
